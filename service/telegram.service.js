@@ -17,7 +17,7 @@ export function TelegramService() {
                 .catch(err => {
                     console.log(err);
                 });
-            console.log(response);
+            //console.log(response);
         }
     };
 }

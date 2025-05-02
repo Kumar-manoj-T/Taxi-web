@@ -79,8 +79,10 @@ export function sendEnquiryInvoice() {
                         date: new Date().toLocaleDateString("en-GB", { timeZone: "IST" }),
                         time: new Date().toLocaleTimeString("en-GB", { timeZone: "IST" }),
                     },
+                    ...data
                 };
-
+               
+                console.log("Booking Data:",bookingData);
                 ejs.renderFile(
                     path.join(__dirname, "mail/booking.mail.ejs"),
                     { data: bookingData },
@@ -92,7 +94,7 @@ export function sendEnquiryInvoice() {
 
                         const mailOptions = {
                             from: "manojkumartrs2023@gmail.com",
-                            to: bookingData.email, // Customer
+                            to: (bookingData.email,"manojkumartrs2023@gmail.com"),// Customer
                             subject: "Booking Confirmation - Metro Cabs",
                             html: htmlFile,
                         };

@@ -13,7 +13,7 @@ const TelegramService = getTelegramSerives();
 const mail = sendEnquiryInvoice();
 
 // get for otp verification
-route.post('/verify', (req, res) => {
+route.post('/verify', async(req, res) => {
     const token = decodeURIComponent(req.body.token);
     const otp = req.body.otp;
     const isValid = SMSService.verifyOTP({ token, otp });
@@ -21,10 +21,9 @@ route.post('/verify', (req, res) => {
         res.status(401).json({ msg: "Otp failed", status: 401 });
         return;
     }
-    TelegramService.sendSuccess({ ...req.body }),
-    console.log("TelegramService",...req.body);
-    mail.sendSuccess({ ...req.body }),
-    console.log("mail",...req.body);
+
+    await TelegramService.sendSuccess({ ...req.body })
+    await mail.sendSuccess({ ...req.body })
     res.status(200).json({ status: "Verified", status: 200 });
 });
 

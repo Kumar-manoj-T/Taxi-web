@@ -102,11 +102,11 @@
 
             <div id="invoice-top" style="display: block; align-items: center; justify-content: center;">
                 <div class="image mb-3" style="display: block; text-align: center;">
-                    <img src="<%= company?.logo %>" alt="image" class="logo">
+                    <img src="assets/img/logo/logo.jpg" alt="image" class="logo">
                 </div>
                 <div class="title">
                     <h2 class="text-blue">
-                        <%= company?.name %> - Booking Details
+                        Metro cabs - Booking Details
                     </h2>
                 </div>
             </div>
@@ -172,7 +172,7 @@
                             </td>
                             <td>
                                 <p class="itemtext ml-4">
-                                    <%= data?.serviceType %>
+                                    <%= (data.service=='0' ) ? 'One Way Trip' : 'Round Trip' %>
                                 </p>
                             </td>
                         </tr>
@@ -184,7 +184,7 @@
                             </td>
                             <td>
                                 <p class="itemtext ml-4">
-                                    <%= data?.vehicle?.cName %>
+                                    <%= data?.estimatedData?.cName %>
                                 </p>
                             </td>
                         </tr>
@@ -196,7 +196,7 @@
                             </td>
                             <td>
                                 <p class="itemtext ml-4">
-                                    <%= data?.pickupLocation %>
+                                    <%= data?.pick %>
                                 </p>
                             </td>
                         </tr>
@@ -208,7 +208,7 @@
                             </td>
                             <td>
                                 <p class="itemtext ml-4">
-                                    <%= data?.dropLocation %>
+                                    <%= data?.drop %>
                                 </p>
                             </td>
                         </tr>
@@ -220,11 +220,11 @@
                             </td>
                             <td>
                                 <p class="itemtext ml-4">
-                                    <%= data?.pickupDate %>
+                                    <%= data?.pickupDateTime.split('T').join("-") %>
                                 </p>
                             </td>
                         </tr>
-                        <tr class="table-row">
+                        <!-- <tr class="table-row">
                             <td>
                                 <p class="itemtext">
                                     Pickup Time:
@@ -235,7 +235,7 @@
                                     <%= data?.pickupTime %>
                                 </p>
                             </td>
-                        </tr>
+                        </tr> -->
                         <tr class="table-row">
                             <td>
                                 <p class="itemtext">
@@ -268,7 +268,7 @@
                             </td>
                             <td>
                                 <p class="itemtext ml-4">
-                                    Rs.<%= data?.vehicle?.rate %>/km
+                                    Rs.<%= data?.estimatedData?.rate %>/km
                                 </p>
                             </td>
                         </tr>
@@ -280,7 +280,7 @@
                             </td>
                             <td>
                                 <p class="itemtext ml-4">
-                                    Rs.<%= data?.vehicle?.betta %>/day
+                                    Rs.<%= data?.estimatedData?.betta %>/day
                                 </p>
                             </td>
                         </tr>
@@ -292,7 +292,7 @@
                             </td>
                             <td>
                                 <p class="itemtext ml-4">
-                                    Rs.<%= data?.vehicle?.price %>
+                                    Rs.<%= data?.estimatedData?.price %>
                                 </p>
                             </td>
                         </tr>
