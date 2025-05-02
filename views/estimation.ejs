@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--<< Header Area >>-->
+
+<head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Gramentheme">
+    <meta name="description" content="Ecomas - Multipurpose Ecommerce HTML Template">
+    <!-- ======== Page title ============ -->
+    <title>Metro Cabs</title>
+    <!--<< Favcion >>-->
+    <link rel="shortcut icon" href="/assets/img/favicon.svg">
+    <!--<< Bootstrap min.css >>-->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <!--<< All Min Css >>-->
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <!--<< Animate.css >>-->
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <!--<< Magnific Popup.css >>-->
+    <link rel="stylesheet" href="/ssets/css/magnific-popup.css">
+    <!--<< MeanMenu.css >>-->
+    <link rel="stylesheet" href="/assets/css/meanmenu.css">
+    <!--<< Swiper Bundle.css >>-->
+    <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css">
+    <!--<< Nice Select.css >>-->
+    <link rel="stylesheet" href="/assets/css/nice-select.css">
+    <!--<< Color.css >>-->
+    <link rel="stylesheet" href="/assets/css/color.css">
+    <!--<< Main.css >>-->
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<style>
+    .custom-card {
+        border: 2px solid #eee;
+        border-radius: 2px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .custom-card .row {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .trip-details {
+        padding: 25px;
+    }
+
+    .trip-details h3 {
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    .trip-details ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .trip-details ul li {
+        margin-bottom: 6px;
+        font-size: 16px;
+    }
+
+    .trip-details .text-danger {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .price-box {
+        padding: 25px;
+        text-align: center;
+    }
+
+    .price-box h2 {
+        font-size: 26px;
+        color: #198754;
+        font-weight: 700;
+    }
+
+    .price-box button {
+        margin-top: 15px;
+        font-weight: 600;
+    }
+
+    .car-image {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .car-image img {
+        max-width: 140%;
+        height: auto;
+        border-radius: 2px;
+    }
+
+    @media (max-width: 767px) {
+        .custom-card .row {
+            flex-direction: column-reverse;
+        }
+
+        .price-box,
+        .trip-details,
+        .car-image {
+            padding: 15px;
+        }
+    }
+</style>
+<body>
+
+    <%- include('partials/header') -%>
+        
+<br><br>
+<!-- Add this CSS to your stylesheet or inside a <style> tag -->
+
+
+<!-- EJS Layout -->
+<div class="list-content">
+    <div class="container">
+        <div class="col-lg-8 col-md-10 col-10 mx-auto">
+            <div class="blog-listview">
+
+                <% var carImage={ "Sedan" : '/assets/img/car/swift.webp' , "SUV"
+                    : '/assets/img/car/suzuki-ertiga.webp' ,"Prime Sedan" : '/assets/img/car/etios.webp', "Innova"
+                    : '/assets/img/car/innova.webp', "Kia Carens" : '/assets/img/car/suv.webp' } %>
+
+                    <% data.estimatedData.forEach(function(car, index) { %>
+                        <div class="card mb-5 custom-card">
+                            <div class="row">
+
+
+                                <!-- Car Image (Right Side) -->
+                                <div class="col-lg-3 car-image">
+                                    <img src="<%= carImage[car.cName] %>" alt="<%= car.cName %> image" />
+                                </div>
+
+                                <!-- Price + Book Now -->
+                                <div class="col-lg-3 price-box">
+                                    <h4 class="text-uppercase">
+                                        <%= (data.service=='0' ) ? 'One Way' : 'Round Trip' %>
+                                    </h4>
+                                    <h2>₹<%= car.price %>
+                                    </h2>
+                                    <button class="btn btn-success" onclick="book(event, <%= index %>)">Book
+                                        Now</button>
+                                </div>
+                                <!-- Trip Details (Left Side) -->
+                                <div class="col-lg-6 trip-details">
+                                    <h3 class="text-uppercase">
+                                        <%= car.cName %>
+                                    </h3>
+                                    <h5 class="mb-3">
+                                        <%= data.from %> to <%= data.to %>
+                                    </h5>
+                                
+                                    <ul>
+                                        <li><strong>Distance:</strong>
+                                            <%= data.distance %> km
+                                        </li>
+                                        <li><strong>Duration:</strong>
+                                            <%= data.duration %>
+                                        </li>
+                                        <li><strong>Service:</strong>
+                                            <%= (data.service=='0' ) ? 'One Way Trip' : 'Round Trip' %>
+                                        </li>
+                                        <li><strong>Driver Bata:</strong> ₹<%= car.batta %>
+                                        </li>
+                                        <li><strong>Rate per km:</strong> ₹<%= car.rate %>
+                                        </li>
+                                    </ul>
+                                
+                                    <p class="text-danger">* Excluded Hill stations, State Taxes & Toll taxes</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <% }) %>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  <%- include('./partials/footer') -%>
+
+    <!--<< All JS Plugins >>-->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <!--<< Viewport Js >>-->
+    <script src="assets/js/viewport.jquery.js"></script>
+    <!--<< Bootstrap Js >>-->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <!--<< Waypoints Js >>-->
+    <script src="assets/js/jquery.waypoints.js"></script>
+    <!--<< Counterup Js >>-->
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <!--<< Swiper Slider Js >>-->
+    <script src="assets/js/swiper-bundle.min.js"></script>
+    <!--<< MeanMenu Js >>-->
+    <script src="assets/js/jquery.meanmenu.min.js"></script>
+    <!--<< Magnific Popup Js >>-->
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <!--<< Wow Animation Js >>-->
+    <script src="assets/js/wow.min.js"></script>
+    <!--<< Main.js >>-->
+    <script src="assets/js/main.js"></script>
+    </body>
+    
+    </html>
+
+  <script>
+    const deserialize = JSON.parse(`<%- JSON.stringify(data) %>`);
+
+    async function book(event, index) {
+        event.preventDefault();
+        const vBooked = deserialize.estimatedData[index];
+        
+        sessionStorage.setItem('bookingInfo', JSON.stringify({ ...deserialize, estimatedData: vBooked }));
+
+        window.location.href = "/verification";
+    }
+  </script>
+
+</body>
+</html>
