@@ -14,10 +14,10 @@ app.set('view engine', 'ejs');
 // Serve static files from the public directory
 app.use(express.static(path.join(process.cwd(), 'public')));
 
-app.use("*",(req,res,next)=>{
-    console.log("req.url",req.originalUrl)
-    next()
-})
+// app.use("*",(req,res,next)=>{
+//     console.log("req.url",req.originalUrl)
+//     next()
+// })
 
 // Define a route for the home page
 app.get('/', (req, res) => {
